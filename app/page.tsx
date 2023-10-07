@@ -1,23 +1,10 @@
 'use client'
-import { useState } from 'react'
 import usePokemon from './hooks/usePokemon'
 import Card from './components/Card'
 import Loader from './components/Loader'
 
 export default function Home() {
-  const [url, setUrl] = useState<string>('')
-  const { data, error, isLoading } = usePokemon(url);
-
-  const onNext = () => {
-    if (data?.next) {
-      setUrl(data.next)
-    }
-  }
-  const onPrev = () => {
-    if (data?.previous) {
-      setUrl(data.previous)
-    }
-  }
+  const { data, error, isLoading, onNext, onPrev } = usePokemon();
 
   return (
     <main className="container mx-auto px-4 h-[100%]">
