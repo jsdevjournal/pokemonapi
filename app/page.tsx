@@ -1,15 +1,12 @@
 'use client'
 import { useState } from 'react'
-import type { GetDataResponse } from './types'
-import useSWR from 'swr'
+import usePokemon from './hooks/usePokemon'
 import Card from './components/Card'
 import Loader from './components/Loader'
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
 export default function Home() {
-  const [url, setUrl] = useState<string>(`https://pokeapi.co/api/v2/pokemon?limit=12&offset=0`)
-  const { data, error, isLoading } = useSWR<GetDataResponse>(url, fetcher);
+  const [url, setUrl] = useState<string>('')
+  const { data, error, isLoading } = usePokemon(url);
 
   const onNext = () => {
     if (data?.next) {
